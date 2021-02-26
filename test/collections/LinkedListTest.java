@@ -129,4 +129,10 @@ class LinkedListTest {
 		boolean found = lk2.searchElement("j");
 		assertEquals("Fail search test", true, found);
 	}
+	
+	@Test
+	void search_test_3() {
+		boolean found = lk.searchElement(1);
+		assertEquals("Fail search test", false, found);
+	}
 }
