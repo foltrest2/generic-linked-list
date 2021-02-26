@@ -1,6 +1,8 @@
 package collections;
 
-public class LinkedList<T> implements GenericLinkedListMethods <T>, Comparable<T> {
+import java.util.Comparator;
+
+public class LinkedList<T> implements GenericLinkedListMethods <T> {
 
 	private Node<T> first;
 
@@ -18,7 +20,7 @@ public class LinkedList<T> implements GenericLinkedListMethods <T>, Comparable<T
 		if(first==null) {
 			first = newNode;
 		}else {
-			Node<T> current = first;
+			Node<?> current = first;
 			while(current.getNextNode()!=null) {
 				current = current.getNextNode();
 			}
@@ -46,7 +48,7 @@ public class LinkedList<T> implements GenericLinkedListMethods <T>, Comparable<T
 	}
 
 	@Override
-	public boolean deleteElement(T t) {
+	public boolean deleteElement(Node<?> toDelete) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -70,16 +72,4 @@ public class LinkedList<T> implements GenericLinkedListMethods <T>, Comparable<T
 		return count;
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public int compareTo(T t) {
-		int comp = 0;
-		if (((Comparable<T>) first.getData()).compareTo(t) < 0) {
-			comp = -1;
-		}
-		if (((Comparable<T>) first.getData()).compareTo(t) > 0) {
-			comp = -1;
-		}
-		return comp;
-	}
 }
