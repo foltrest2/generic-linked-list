@@ -1,33 +1,27 @@
 package collections;
 
-public class Node <T1>{
+public class Node <T>{
 
-	private Node<?> nextNode;
-	private T1 data;
+	private Node<T> nextNode;
+	private T data;
 	
-	
-	public Node(T1 data) {
+	public Node(T data) {
 		this.data = data;
 	}
 
-
-
-	public Node<?> getNextNode() {
+	public Node<T> getNextNode() {
 		return nextNode;
 	}
 
-
-	public void setNextNode(Node<?> nextNode) {
+	public void setNextNode(Node<T> nextNode) {
 		this.nextNode = nextNode;
 	}
 
-
-	public T1 getData() {
+	public T getData() {
 		return data;
 	}
 
-
-	public void setData(T1 data) {
+	public void setData(T data) {
 		this.data = data;
 	}
 }
