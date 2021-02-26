@@ -52,27 +52,22 @@ public class LinkedList<T> implements GenericLinkedListMethods <T> {
 	@Override
 	public boolean deleteElement(Node<?> toDelete) {
 		boolean deleted = false;
-		// Store head node
+		
 		Node<?> temp = first, prev = null;
-
-		// If head node itself holds the key to be deleted
+		
 		if (temp != null && temp.getData() == toDelete.getData()) {
-			first = temp.getNextNode(); // Changed head
+			first = temp.getNextNode(); 	
 			return deleted = true;
 		}
 
-		// Search for the key to be deleted, keep track of
-		// the previous node as we need to change temp.next
 		while (temp != null && temp.getData() != toDelete.getData()) {
 			prev = temp;
 			temp = temp.getNextNode();
 		}
 
-		// If key was not present in linked list
 		if (temp == null)
 			return deleted;
 
-		// Unlink the node from linked list
 		prev.setNextNode(temp.getNextNode());
 		return deleted;
 	}
