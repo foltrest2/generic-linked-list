@@ -20,7 +20,7 @@ public class LinkedList<T> implements GenericLinkedListMethods <T> {
 	public boolean addElement(T t) {
 		Node<T> newNode = new Node<T>(t);
 		boolean exists = searchElement(newNode);
-		if (exists) {
+		if (!exists) {
 			if(first==null) {
 				first = newNode;
 				return true;
