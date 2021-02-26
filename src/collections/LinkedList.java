@@ -51,17 +51,22 @@ public class LinkedList<T extends Comparable<T>> implements GenericLinkedListMet
 		Node<T> n = new Node<T>(t);
 		Node<T> search = null;
 		Node<T> current = first;
-		while(current!=null && search==null) {
-			if(n.getData().toString().equals(current.getData().toString())) {
-				search = current;
-			}
-			current = current.getNextNode();
-		}
-		if (search != null) {
-			return true;
+		if (first.getData() == null) {
+			return false;
 		}
 		else {
-			return false;
+			while(current!=null && search==null) {
+				if(n.getData().toString().equals(current.getData().toString())) {
+					search = current;
+				}
+				current = current.getNextNode();
+			}
+			if (search != null) {
+				return true;
+			}
+			else {
+				return false;
+			}
 		}
 	}
 

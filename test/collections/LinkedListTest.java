@@ -153,4 +153,11 @@ class LinkedListTest {
 		setupScenary_7();
 		assertEquals("Fail search test", new Integer(20), lk.getItem(0));
 	}
+	
+	@Test
+	void search_test_3() {
+		boolean found = lk.searchElement(1);
+		assertEquals("Fail search test", false, found);
+
+	}
 }
