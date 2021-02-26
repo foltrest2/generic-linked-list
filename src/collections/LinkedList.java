@@ -1,24 +1,28 @@
 package collections;
 
-public class LinkedList<T> implements GenericLinkedListMethods <T>, Comparable<T> {
+public class LinkedList<T> implements GenericLinkedListMethods <T> {
 
-	private Node<T> first;
+	private Node<?> first;
 
 	public LinkedList() {
 		first = null;
 	}
 
-	public Node<T> getFirstNode(){
+	public Node<?> getFirstNode(){
 		return first;
+	}
+
+	public void setFirst(Node<?> first) {
+		this.first = first;
 	}
 
 	@Override
 	public boolean addElement(T t) {
-		Node<T> newNode = new Node<T>(t);
+		Node<?> newNode = new Node<T>(t);
 		if(first==null) {
 			first = newNode;
 		}else {
-			Node<T> current = first;
+			Node<?> current = first;
 			while(current.getNextNode()!=null) {
 				current = current.getNextNode();
 			}
@@ -46,9 +50,25 @@ public class LinkedList<T> implements GenericLinkedListMethods <T>, Comparable<T
 	}
 
 	@Override
-	public boolean deleteElement(T t) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean deleteElement(Node<?> toDelete) {
+		boolean deleted = false;
+
+		if(first!=null) {
+			if(toDelete.getData() == first.getData()) {
+				first = first.getNextNode();
+				deleted = true;
+			}else {
+				Node<?> current = first;
+				while(current.getNextNode()!=null && !(toDelete.getData() == current.getNextNode().getData())) {
+					current = current.getNextNode();
+				}
+				if(current.getNextNode()!=null) { //current is before
+					current.setNextNode(current.getNextNode().getNextNode());
+					deleted = true;
+				}
+			}
+		}
+		return deleted;
 	}
 
 	@Override
@@ -61,25 +81,13 @@ public class LinkedList<T> implements GenericLinkedListMethods <T>, Comparable<T
 	}
 
 	@Override
-	public int size(Node<?> n, int count) {
-		if(n == null) {
-			return count;
-		} else {
-			size(n.getNextNode(), count++);
+	public int size() {
+	int count = 0;
+		Node<?> current = first;
+		while(current!=null) {
+			current = current.getNextNode();
+			count++;
 		}
 		return count;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public int compareTo(T t) {
-		int comp = 0;
-		if (((Comparable<T>) first.getData()).compareTo(t) < 0) {
-			comp = -1;
-		}
-		if (((Comparable<T>) first.getData()).compareTo(t) > 0) {
-			comp = -1;
-		}
-		return comp;
 	}
 }
