@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 class LinkedListTest {
 	private LinkedList<Integer> lk = new LinkedList<>();
-//	private LinkedList<String> lk2 = new LinkedList<>();
+	private LinkedList<String> lk2 = new LinkedList<>();
 
 	public void setupScenary_1(){
 		lk.setFirst(1);
@@ -43,6 +43,12 @@ class LinkedListTest {
 		lk.getFirstNode().getNextNode().getNextNode().getNextNode().setNextNode(new Node<Integer>(15));
 	}
 
+	public void setupScenary_6() {
+		lk2.setFirst("d");
+		lk2.getFirstNode().setNextNode(new Node<String>("g"));
+		lk2.getFirstNode().getNextNode().setNextNode(new Node<String>("j"));
+	}
+	
 	@Test
 	void size_test() {
 		setupScenary_1();
@@ -97,5 +103,30 @@ class LinkedListTest {
 		assertEquals("Fail add test", new Integer(1), lk.getFirstNode().getData());
 		assertEquals("Fail add test", new Integer(7), lk.getFirstNode().getNextNode().getNextNode().getNextNode().getData());
 		assertEquals("Fail add test", new Integer(11), lk.getFirstNode().getNextNode().getNextNode().getNextNode().getNextNode().getNextNode().getData());
+	}
+	
+	@Test
+	void add_test_3() {
+		setupScenary_6();
+		lk2.addElement("c");
+		lk2.addElement("f");
+		lk2.addElement("h");
+		assertEquals("Fail add test", "c", lk2.getFirstNode().getData());
+		assertEquals("Fail add test", "f", lk2.getFirstNode().getNextNode().getNextNode().getData());
+		assertEquals("Fail add test", "h", lk2.getFirstNode().getNextNode().getNextNode().getNextNode().getNextNode().getData());
+	}
+	
+	@Test
+	void search_test_1() {
+		setupScenary_5();
+		boolean found = lk.searchElement(8);
+		assertEquals("Fail search test", true, found);
+	}
+	
+	@Test
+	void search_test_2() {
+		setupScenary_6();
+		boolean found = lk2.searchElement("j");
+		assertEquals("Fail search test", true, found);
 	}
 }
