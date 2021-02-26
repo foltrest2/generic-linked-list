@@ -3,8 +3,8 @@ package collections;
 public interface GenericLinkedListMethods <T>{
 	
 	public boolean addElement(T t);
-	public boolean searchElement(Node<?> n);
-	public boolean deleteElement(Node<?> n);
+	public boolean searchElement(T t);
+	public boolean deleteElement(T t);
 	public boolean isEmpty();
 	public int size();
 	

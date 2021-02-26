@@ -1,35 +1,44 @@
 package collections;
 
-public class LinkedList<T> implements GenericLinkedListMethods <T> {
+public class LinkedList<T extends Comparable<T>> implements GenericLinkedListMethods <T>, Comparable<T> {
 
-	private Node<?> first;
+	private Node<T> first;
 
 	public LinkedList() {
-		first = null;
+		first = new Node<T>(null);
 	}
 
-	public Node<?> getFirstNode(){
+	public Node<T> getFirstNode(){
 		return first;
 	}
 
-	public void setFirst(Node<?> first) {
-		this.first = first;
+	public void setFirst(T t) {
+		first.setData(t);
 	}
 
 	@Override
 	public boolean addElement(T t) {
 		Node<T> newNode = new Node<T>(t);
-		boolean exists = searchElement(newNode);
+		boolean exists = searchElement(t);
 		if (!exists) {
 			if(first==null) {
 				first = newNode;
 				return true;
-			}else {
-				Node<?> current = first;
-				while(current.getNextNode()!=null && current.getData().toString().compareTo(newNode.getData().toString())<0	) {
+			}
+			if (t.compareTo(first.getData()) < 0) {
+				newNode.setNextNode(first);
+				first = newNode;
+				return true;
+			}
+			else {
+				Node<T> current = first;
+				Node<T> before = null;
+				while(current.getNextNode()!=null && current.getData().compareTo(newNode.getData())<0) {
+					before = current;
 					current = current.getNextNode();
 				}
-				current.setNextNode(newNode);
+				newNode.setNextNode(current);
+				before.setNextNode(newNode);
 				return true;
 			}
 		}
@@ -38,9 +47,10 @@ public class LinkedList<T> implements GenericLinkedListMethods <T> {
 	}
 
 	@Override
-	public boolean searchElement(Node<?> n) {
-		Node<?> search = null;
-		Node<?> current = first;
+	public boolean searchElement(T t) {
+		Node<T> n = new Node<T>(t);
+		Node<T> search = null;
+		Node<T> current = first;
 		while(current!=null && search==null) {
 			if(n.getData().toString().equals(current.getData().toString())) {
 				search = current;
@@ -56,11 +66,11 @@ public class LinkedList<T> implements GenericLinkedListMethods <T> {
 	}
 
 	@Override
-	public boolean deleteElement(Node<?> toDelete) {
+	public boolean deleteElement(T t) {
 		boolean deleted = false;
-		
-		Node<?> temp = first, prev = null;
-		
+		Node<T> toDelete = new Node<T>(t);
+		Node<T> temp = first, prev = null;
+
 		if (temp != null && temp.getData() == toDelete.getData()) {
 			first = temp.getNextNode(); 	
 			return deleted = true;
@@ -72,7 +82,7 @@ public class LinkedList<T> implements GenericLinkedListMethods <T> {
 		if (temp == null) {
 			return deleted;
 		}
-		prev.setNextNode(temp.getNextNode());
+		prev.setNextNode(temp.getNextNode()); //Lag, ping 999999
 		return deleted;
 	}
 
@@ -88,12 +98,18 @@ public class LinkedList<T> implements GenericLinkedListMethods <T> {
 	@Override
 	public int size() {
 		int count = 0;
-		Node<?> current = first;
+		Node<T> current = first;
 		while(current!=null) {
 			current = current.getNextNode();
 			count++;
 		}
 		return count;
+	}
+
+	@Override
+	public int compareTo(T o) {
+
+		return 0;
 	}
 
 }
