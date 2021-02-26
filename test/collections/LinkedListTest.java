@@ -83,4 +83,14 @@ class LinkedListTest {
 		assertNull("Fail empty test", lk.getFirstNode().getNextNode());
 		assertEquals("Fail size test", 1, lk.size());
 	}
+	
+	@Test
+	void add_test_1() {
+		setupScenary_1();
+		Node<Integer> n4 = new Node<>(5);
+		lk.getFirstNode().getNextNode().getNextNode().setNextNode(n4);;
+		Node<Integer> n5 = new Node<>(4);
+		lk.addElement(n5);
+		assertEquals("Fail add test", 4, lk.getFirstNode().getNextNode().getNextNode().getNextNode().getNextNode().getData());
+	}
 }
