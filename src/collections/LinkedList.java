@@ -1,22 +1,24 @@
 package collections;
 
-import java.util.Comparator;
-
 public class LinkedList<T> implements GenericLinkedListMethods <T> {
 
-	private Node<T> first;
+	private Node<?> first;
 
 	public LinkedList() {
 		first = null;
 	}
 
-	public Node<T> getFirstNode(){
+	public Node<?> getFirstNode(){
 		return first;
+	}
+
+	public void setFirst(Node<?> first) {
+		this.first = first;
 	}
 
 	@Override
 	public boolean addElement(T t) {
-		Node<T> newNode = new Node<T>(t);
+		Node<?> newNode = new Node<T>(t);
 		if(first==null) {
 			first = newNode;
 		}else {
@@ -49,8 +51,24 @@ public class LinkedList<T> implements GenericLinkedListMethods <T> {
 
 	@Override
 	public boolean deleteElement(Node<?> toDelete) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean deleted = false;
+
+		if(first!=null) {
+			if(toDelete.getData() == first.getData()) {
+				first = first.getNextNode();
+				deleted = true;
+			}else {
+				Node<?> current = first;
+				while(current.getNextNode()!=null && !(toDelete.getData() == current.getNextNode().getData())) {
+					current = current.getNextNode();
+				}
+				if(current.getNextNode()!=null) { //current is before
+					current.setNextNode(current.getNextNode().getNextNode());
+					deleted = true;
+				}
+			}
+		}
+		return deleted;
 	}
 
 	@Override
@@ -63,11 +81,12 @@ public class LinkedList<T> implements GenericLinkedListMethods <T> {
 	}
 
 	@Override
-	public int size(Node<?> n, int count) {
-		if(n == null) {
-			return count;
-		} else {
-			size(n.getNextNode(), count++);
+	public int size() {
+	int count = 0;
+		Node<?> current = first;
+		while(current!=null) {
+			current = current.getNextNode();
+			count++;
 		}
 		return count;
 	}
