@@ -6,6 +6,6 @@ public interface GenericLinkedListMethods <T>{
 	public boolean searchElement(T t);
 	public boolean deleteElement(T t);
 	public boolean isEmpty();
-	public int size();
+	public int size(Node<?> n, int count);
 	
 }
