@@ -91,11 +91,30 @@ class LinkedListTest {
 	}
 
 	@Test
+	public void delete_test_4() {
+		lk.addElement(new Integer(0));
+		assertEquals("Fail delete test", true, lk.deleteElement(new Integer(0)));
+	}
+	
+	@Test
+	public void delete_test_5() {
+		assertEquals("Fail delete test", false, lk.deleteElement(new Integer(0)));
+	}
+	
+	@Test
+	public void delete_test_6() {
+		setupScenary_6();
+		assertEquals("Fail delete test", true, lk2.deleteElement("d"));
+		assertEquals("Fail delete test", true, lk2.deleteElement("j"));
+		assertEquals("Fail delete test", 1, lk2.size());
+	}
+	
+	@Test
 	public void add_test_1() {
 		setupScenary_1();
 		lk.getFirstNode().getNextNode().getNextNode().setNextNode(new Node<Integer>(5));
 		lk.addElement(4);
-		assertEquals("Fail add test", new Integer(4), lk.getFirstNode().getNextNode().getNextNode().getNextNode().getData());
+		assertEquals("Fail add test1", new Integer(4), lk.getFirstNode().getNextNode().getNextNode().getNextNode().getData());
 	}
 
 	@Test
@@ -104,9 +123,9 @@ class LinkedListTest {
 		lk.addElement(1);
 		lk.addElement(7);
 		lk.addElement(11);
-		assertEquals("Fail add test", new Integer(1), lk.getFirstNode().getData());
-		assertEquals("Fail add test", new Integer(7), lk.getFirstNode().getNextNode().getNextNode().getNextNode().getData());
-		assertEquals("Fail add test", new Integer(11), lk.getFirstNode().getNextNode().getNextNode().getNextNode().getNextNode().getNextNode().getData());
+		assertEquals("Fail add test2", new Integer(1), lk.getFirstNode().getData());
+		assertEquals("Fail add test2", new Integer(7), lk.getFirstNode().getNextNode().getNextNode().getNextNode().getData());
+		assertEquals("Fail add test2", new Integer(11), lk.getFirstNode().getNextNode().getNextNode().getNextNode().getNextNode().getNextNode().getData());
 	}
 
 	@Test
@@ -115,9 +134,9 @@ class LinkedListTest {
 		lk2.addElement("c");
 		lk2.addElement("f");
 		lk2.addElement("h");
-		assertEquals("Fail add test", "c", lk2.getFirstNode().getData());
-		assertEquals("Fail add test", "f", lk2.getFirstNode().getNextNode().getNextNode().getData());
-		assertEquals("Fail add test", "h", lk2.getFirstNode().getNextNode().getNextNode().getNextNode().getNextNode().getData());
+		assertEquals("Fail add test3", "c", lk2.getFirstNode().getData());
+		assertEquals("Fail add test3", "f", lk2.getFirstNode().getNextNode().getNextNode().getData());
+		assertEquals("Fail add test3", "h", lk2.getFirstNode().getNextNode().getNextNode().getNextNode().getNextNode().getData());
 	}
 
 	@Test
@@ -135,29 +154,28 @@ class LinkedListTest {
 	}
 
 	@Test
+	void search_test_3() {
+		boolean found = lk.searchElement(1);
+		assertEquals("Fail search test", false, found);
+	}
+	
+	@Test
 	public void get_item_test_1() {
 		setupScenary_3();
-		assertEquals("Fail search test", new Integer(1), lk.getItem(0));
-		assertEquals("Fail search test", new Integer(4), lk.getItem(2));
+		assertEquals("Fail get item test", new Integer(1), lk.getItem(0));
+		assertEquals("Fail get item test", new Integer(4), lk.getItem(2));
 	}
 
 	@Test
 	public void get_item_test_2() {
 		setupScenary_5();
-		assertEquals("Fail search test", new Integer(12), lk.getItem(3));
-		assertEquals("Fail search test", new Integer(15), lk.getItem(4));
+		assertEquals("Fail get item test", new Integer(12), lk.getItem(3));
+		assertEquals("Fail get item test", new Integer(15), lk.getItem(4));
 	}
 	
 	@Test
 	public void get_item_test_3() {
 		setupScenary_7();
-		assertEquals("Fail search test", new Integer(20), lk.getItem(0));
-	}
-	
-	@Test
-	void search_test_3() {
-		boolean found = lk.searchElement(1);
-		assertEquals("Fail search test", false, found);
-
+		assertEquals("Fail get item test", new Integer(20), lk.getItem(0));
 	}
 }

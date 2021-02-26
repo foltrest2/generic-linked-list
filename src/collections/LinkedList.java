@@ -21,7 +21,7 @@ public class LinkedList<T extends Comparable<T>> implements GenericLinkedListMet
 		Node<T> newNode = new Node<T>(t);
 		boolean exists = searchElement(t);
 		if (!exists) {
-			if(first==null) {
+			if(first.getData()==null) {
 				first = newNode;
 				return true;
 			}
@@ -79,29 +79,35 @@ public class LinkedList<T extends Comparable<T>> implements GenericLinkedListMet
 			n--;
 		}
 		search = current;
-		
+
 		return search.getData();
 	}
-	
+
 	@Override
 	public boolean deleteElement(T t) {
 		boolean deleted = false;
 		Node<T> toDelete = new Node<T>(t);
 		Node<T> temp = first, prev = null;
 
-		if (temp != null && temp.getData() == toDelete.getData()) {
-			first = temp.getNextNode(); 	
-			return deleted = true;
-		}
-		while (temp != null && temp.getData() != toDelete.getData()) {
-			prev = temp;
-			temp = temp.getNextNode();
-		}
-		if (temp == null) {
+		if (first.getData() == null) {
+			return false;
+		} else {
+			if (temp != null && temp.getData().compareTo(toDelete.getData()) == 0) {
+				first = temp.getNextNode(); 	
+				return deleted = true;
+			}
+			while (temp != null && temp.getData().compareTo(toDelete.getData()) != 0) {
+				prev = temp;
+				temp = temp.getNextNode();
+			}
+			if (temp == null) {
+				deleted = false;
+				return deleted;
+			}
+			prev.setNextNode(temp.getNextNode()); 
+			deleted = true;
 			return deleted;
 		}
-		prev.setNextNode(temp.getNextNode()); //Lag, ping 999999
-		return deleted;
 	}
 
 	@Override
