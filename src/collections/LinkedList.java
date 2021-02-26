@@ -19,29 +19,35 @@ public class LinkedList<T> implements GenericLinkedListMethods <T> {
 	@Override
 	public boolean addElement(T t) {
 		Node<T> newNode = new Node<T>(t);
-		if(first==null) {
-			first = newNode;
-		}else {
-			Node<?> current = first;
-			while(current.getNextNode()!=null) {
-				current = current.getNextNode();
+		boolean exists = searchElement(newNode);
+		if (exists) {
+			if(first==null) {
+				first = newNode;
+				return true;
+			}else {
+				Node<?> current = first;
+				while(current.getNextNode()!=null && current.getData().toString().compareTo(newNode.getData().toString())<0	) {
+					current = current.getNextNode();
+				}
+				current.setNextNode(newNode);
+				return true;
 			}
-			current.setNextNode(newNode);
 		}
-		return false;
+		else 
+			return false;
 	}
 
 	@Override
-	public boolean searchElement(T t) {
-		Node<?> n = null;
+	public boolean searchElement(Node<?> n) {
+		Node<?> search = null;
 		Node<?> current = first;
-		while(current!=null && n==null) {
-			if(t.equals(current.getData())) {
-				n = current;
+		while(current!=null && search==null) {
+			if(n.getData().toString().equals(current.getData().toString())) {
+				search = current;
 			}
 			current = current.getNextNode();
 		}
-		if (n != null) {
+		if (search != null) {
 			return true;
 		}
 		else {
