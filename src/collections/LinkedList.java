@@ -66,6 +66,19 @@ public class LinkedList<T extends Comparable<T>> implements GenericLinkedListMet
 	}
 
 	@Override
+	public T getItem(int n) {
+		Node<T> search = null;
+		Node<T> current = first;
+		while(n > 0) {
+			current = current.getNextNode();
+			n--;
+		}
+		search = current;
+		
+		return search.getData();
+	}
+	
+	@Override
 	public boolean deleteElement(T t) {
 		boolean deleted = false;
 		Node<T> toDelete = new Node<T>(t);
@@ -111,5 +124,4 @@ public class LinkedList<T extends Comparable<T>> implements GenericLinkedListMet
 
 		return 0;
 	}
-
 }
