@@ -30,9 +30,11 @@ class LinkedListTest {
 		Node<Integer> n1 = new Node<>(1);
 		Node<Integer> n2 = new Node<>(2);
 		Node<Integer> n3 = new Node<>(3);
+		Node<Integer> n4 = new Node<>(4);
 		lk.setFirst(n1);
 		lk.getFirstNode().setNextNode(n2);
 		lk.getFirstNode().getNextNode().setNextNode(n3);
+		lk.getFirstNode().getNextNode().getNextNode().setNextNode(n4);
 		lk.deleteElement(n3);
 	}
 	
@@ -60,29 +62,27 @@ class LinkedListTest {
 	}
 	
 	@Test
-	void delete_test() {
+	void delete_test_1() {
 		setupScenary_2();
 		assertEquals("Fail delete test 1", 1, lk.getFirstNode().getData());
 		assertEquals("Fail delete test 1", 3, lk.getFirstNode().getNextNode().getData());
 		assertEquals("Fail size test", 2, lk.size());
-
 	}
 	
 	@Test
-	void delete_test2() {
+	void delete_test_2() {
 		setupScenary_3();
 		assertEquals("Fail delete test 1", 1, lk.getFirstNode().getData());
-		assertEquals("Fail delete test 1", 2, lk.getFirstNode().getNextNode().getData());
-		assertNull("Fail empty test", lk.getFirstNode().getNextNode().getNextNode());
-		assertEquals("Fail size test", 2, lk.size());
+		assertEquals("Fail delete test 1", 4, lk.getFirstNode().getNextNode().getNextNode().getData());
+		assertNull("Fail empty test", lk.getFirstNode().getNextNode().getNextNode().getNextNode());
+		assertEquals("Fail size test", 3, lk.size());
 	}
 	
 	@Test
-	void delete_test4() {
+	void delete_test_3() {
 		setupScenary_4();
 		assertEquals("Fail delete test 1", 2, lk.getFirstNode().getData());
 		assertNull("Fail empty test", lk.getFirstNode().getNextNode());
 		assertEquals("Fail size test", 1, lk.size());
 	}
-
 }

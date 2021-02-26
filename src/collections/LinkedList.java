@@ -59,15 +59,13 @@ public class LinkedList<T> implements GenericLinkedListMethods <T> {
 			first = temp.getNextNode(); 	
 			return deleted = true;
 		}
-
 		while (temp != null && temp.getData() != toDelete.getData()) {
 			prev = temp;
 			temp = temp.getNextNode();
 		}
-
-		if (temp == null)
+		if (temp == null) {
 			return deleted;
-
+		}
 		prev.setNextNode(temp.getNextNode());
 		return deleted;
 	}
