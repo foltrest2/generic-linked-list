@@ -18,7 +18,7 @@ public class LinkedList<T> implements GenericLinkedListMethods <T> {
 
 	@Override
 	public boolean addElement(T t) {
-		Node<?> newNode = new Node<T>(t);
+		Node<T> newNode = new Node<T>(t);
 		if(first==null) {
 			first = newNode;
 		}else {
@@ -52,22 +52,28 @@ public class LinkedList<T> implements GenericLinkedListMethods <T> {
 	@Override
 	public boolean deleteElement(Node<?> toDelete) {
 		boolean deleted = false;
+		// Store head node
+		Node<?> temp = first, prev = null;
 
-		if(first!=null) {
-			if(toDelete.getData() == first.getData()) {
-				first = first.getNextNode();
-				deleted = true;
-			}else {
-				Node<?> current = first;
-				while(current.getNextNode()!=null && !(toDelete.getData() == current.getNextNode().getData())) {
-					current = current.getNextNode();
-				}
-				if(current.getNextNode()!=null) { //current is before
-					current.setNextNode(current.getNextNode().getNextNode());
-					deleted = true;
-				}
-			}
+		// If head node itself holds the key to be deleted
+		if (temp != null && temp.getData() == toDelete.getData()) {
+			first = temp.getNextNode(); // Changed head
+			return deleted = true;
 		}
+
+		// Search for the key to be deleted, keep track of
+		// the previous node as we need to change temp.next
+		while (temp != null && temp.getData() != toDelete.getData()) {
+			prev = temp;
+			temp = temp.getNextNode();
+		}
+
+		// If key was not present in linked list
+		if (temp == null)
+			return deleted;
+
+		// Unlink the node from linked list
+		prev.setNextNode(temp.getNextNode());
 		return deleted;
 	}
 
@@ -82,7 +88,7 @@ public class LinkedList<T> implements GenericLinkedListMethods <T> {
 
 	@Override
 	public int size() {
-	int count = 0;
+		int count = 0;
 		Node<?> current = first;
 		while(current!=null) {
 			current = current.getNextNode();
