@@ -122,9 +122,13 @@ public class LinkedList<T extends Comparable<T>> implements GenericLinkedListMet
 	@Override
 	public int size() {
 		int count = 0;
+		boolean exit = false;
 		Node<T> current = first;
-		while(current!=null) {
+		while(!exit && current.getData()!=null) {
 			current = current.getNextNode();
+			if (current == null) {
+				exit = true;
+			}
 			count++;
 		}
 		return count;

@@ -54,10 +54,21 @@ class LinkedListTest {
 	}
 
 	@Test
-	public void size_test() {
+	public void size_test_1() {
 		setupScenary_1();
 		assertEquals("Fail size test", 3, lk.size());
 		assertEquals("Fail size test", new Integer(1), lk.getFirstNode().getData());
+	}
+	
+	@Test
+	public void size_test_2() {
+		assertEquals("Fail size test", 0, lk.size());
+	}
+	
+	@Test
+	public void size_test_3() {
+		setupScenary_5();
+		assertEquals("Fail size test", 5, lk.size());
 	}
 
 	@Test
