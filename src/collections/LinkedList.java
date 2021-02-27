@@ -113,7 +113,7 @@ public class LinkedList<T extends Comparable<T>> implements GenericLinkedListMet
 	@Override
 	public boolean isEmpty() {
 		boolean isEmpty = false;
-		if (first == null) {
+		if (first.getData() == null) {
 			isEmpty = true;
 		}
 		return isEmpty;
